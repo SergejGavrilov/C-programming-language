@@ -25,16 +25,16 @@ int main()
             for (j = 1; j <= n; j++){
                 a[i][j] = i * j;
             }
- +        }
- +        for (i = y1; i <= y2; i++, printf("\n"))
- +            for (j = x1; j <= x2; j++)
- +                printf("%*d",7, a[i][j]);
- +    }
- +    for (i = 1; i <= n; i++){
- +        free(a[i]);
- +        a[i] = NULL;
- +    }
- +    free(a);
- +    a = NULL;
- +    return 0;
- +}
+         }
+         for (i = y1; i <= y2; i++, printf("\n"))
+             for (j = x1; j <= x2; j++)
+                 printf("%*d",7, a[i][j]);
+     }
+     for (i = 1; i <= n; i++){
+         free(a[i]);
+         a[i] = NULL;
+     }
+     free(a);
+     a = NULL;
+     return 0;
+ }
