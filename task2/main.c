@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 typedef struct person{
-    char* name;
-    char* tel;
+    char name[50];
+    char tel[20];
     char checkname[50], chektel[20];
     int id;
 };
@@ -31,7 +32,7 @@ void cleanString(char* str)
     }
 }
 
-void read(char* first, char* second)
+void read(char* first, char* second)  //функция читает телефон и записывает его Эбез шедухи"
 {
     char c;
     int k;
@@ -70,17 +71,25 @@ void read(char* first, char* second)
 }
 
 void vecInit(struct vector *vec){
-    vec->p = (struct hum*)malloc(10 * sizeof(struct person));
+    vec->p = (struct person*)malloc(10 * sizeof(struct person));
     vec->vsize = 10;
     vec->currentsize = 0;
 
 }
 
-void vecAdd(struct vector *vec, struct person per){
-    if (vec->currentsize == vec->vsize){
-
+void vecAdd(struct vector* vec, struct person per){
+    if (vec->currentsize == vec->vsize)
+    {
+        vec->p = (struct vector*) raelloc(vec->p, (vec->vsize * 2) * sizeof(struct vector));  //когда место в вектора закачивается, расширяем его в 2 раза
     }
+    vec->currentsize += 1;
+    strcpy(vec->p[vec->currentsize].name, per.name);
+    strcpy(vec->p[vec->currentsize].checkname, per.checkname);
+    strcpy(vec->p[vec->currentsize].tel, per.tel);
+    strcpy(vec->p[vec->currentsize].chektel, per.chektel);
+    strcpy(vec->p[vec->currentsize].id, per.id);
 }
+
 int main(int argc, char *argv[])
 {
     struct person per;
@@ -88,26 +97,31 @@ int main(int argc, char *argv[])
     char command[30];
     char name[50];
     char tel[20];
-    int j, currentID = 0;
+    int j, i, currentID = 0;
     FILE *file;
     vecInit(&book);
 
-    if (file == NULL){
+    if (file == NULL)
+    {
 
         printf("new file created \n");
-    }else{
+    }else
+    {
+        file = fopen(argv[1], "r");
         while (!EOF)
         {
-            file = fopen(argv[1], "r");
-            fscanf(file, "%d %s %s", currentID, name, tel);
-            book.p[currentID].id = currentID;
-            book.p[currentID].name = name;
-            book.p[currentID].tel = tel;
+
+            fscanf(file, "%d %s",  per.id, per.name);
+            read(per.tel, per.chektel);
+            strcpy(per.checkname, per.name);
+            toLowerCase(per.checkname);
+            currentID = per.id + 1;
+            vecAdd(&book, per);
         }
     }
     file = fopen(argv[1], "w");
 
-    int i = 0;
+
     while(1){
         scanf("%s", command);
         if (!strcmp(command, "create")){
@@ -119,8 +133,7 @@ int main(int argc, char *argv[])
             currentID += 1;
             fprintf(file, "%d %s %s \n", currentID, per.name, per.tel);
             printf("%d %s %s %s %s \n", currentID, per.name, per.checkname, per.tel, per.chektel);
-            printf("%d \n", i);
-            i++;
+
 
         }else if(!strcmp(command, "exit")){
             //for (j = 0; j <= i; j++){
@@ -137,6 +150,13 @@ int main(int argc, char *argv[])
 
             read(per.tel, per.chektel);
             printf("%s %s \n", per.tel, per.chektel);
+        }else if (!strcmp(command, "print"))
+        {
+            for (i = 0; i < book.currentsize; i++)
+            {
+                printf("%d %s %s %s %s \n",book.p[i].id, book.p[i].name,
+                        book.p[i].checkname, book.p[i].tel, book.p[i].chektel);
+            }
         }
 
     }
