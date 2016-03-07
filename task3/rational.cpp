@@ -49,7 +49,7 @@ rational::rational(int n, int d){
 
 }
 
-rational rational::operator+(rational r){
+rational rational::operator+(const rational &r) const {
 	int t = lcm(d, r.d);
 	rational brandNew;
 /*  int n1 = n;
@@ -63,7 +63,7 @@ rational rational::operator+(rational r){
 	return brandNew;
 }
 
-rational rational::operator-(rational r){
+rational rational::operator-(const rational &r) const {
     int t = lcm(d, r.d);
 	rational brandNew;
 	brandNew.n = (this->n * (t / this->d) - r.n * (t / r.d));
@@ -71,14 +71,14 @@ rational rational::operator-(rational r){
 	return brandNew;
 }
 
-rational rational::operator*(rational r){
+rational rational::operator*(const rational &r) const {
     rational brandNew;
     brandNew.n = this->n * r.n;
     brandNew.d = this->d * r.d;
     return brandNew;
 }
 
-rational rational::operator/(rational r){
+rational rational::operator/(const rational &r) const {
     rational brandNew;
     brandNew.n = this->n * r.d;
     brandNew.d = this->d * r.n;
