@@ -1,6 +1,7 @@
+
 #include "rational.h"
 
-int rational::gcd(int a, int b){ // calculates gcd Note: gcd will always be positive
+int rational::gcd(int a, int b) const { // calculates gcd Note: gcd will always be positive
     if (a < 0){
         a = -a;
     }
@@ -16,7 +17,7 @@ int rational::gcd(int a, int b){ // calculates gcd Note: gcd will always be posi
     return a;
 }
 
-int rational::lcm(int a, int b){
+int rational::lcm(int a, int b) const {
     if (a < 0){
         a = -a;
     }
@@ -50,11 +51,11 @@ rational::rational(int n, int d){
 }
 
 rational rational::operator+(const rational &r) const {
+
 	int t = lcm(d, r.d);
 	rational brandNew;
 /*  int n1 = n;
 	int d1 = d;
-
 	int q1 = this->n * (t / this->d);
 	int q2 = r.n * (t / r.d);
 	int q3 = q1 + q2;*/
