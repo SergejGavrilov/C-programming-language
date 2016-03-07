@@ -14,10 +14,10 @@ class rational{
 		rational(int n, int d);
 		int getNum() const;
 		int getDenom() const;
-		rational operator+(rational);
-		rational operator-(rational);
-		rational operator*(rational);
-		rational operator/(rational);
+		rational operator+(rational const &)const;
+		rational operator-(rational const &)const;
+		rational operator*(rational const &)const;
+		rational operator/(rational const &)const;
 
 };
 
