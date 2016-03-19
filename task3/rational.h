@@ -18,6 +18,7 @@ class rational{
 		rational operator-(rational const &)const;
 		rational operator*(rational const &)const;
 		rational operator/(rational const &)const;
+		rational operator-(void)const;
 
 };
 
