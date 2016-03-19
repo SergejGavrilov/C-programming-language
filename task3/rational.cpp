@@ -54,8 +54,9 @@ rational rational::operator+(const rational &r) const {
 	rational brandNew;
 	brandNew.n = (this->n * r.d + r.n * this->d);
 	brandNew.d = r.d * this->d;
-	brandNew.n /= gcd(brandNew.n, brandNew.d);
-	brandNew.d /= gcd(brandNew.n, brandNew.d);
+	int t = gcd(brandNew.n, brandNew.d);
+	brandNew.n /= t;
+	brandNew.d /= t;
 	return brandNew;
 }
 
@@ -72,8 +73,9 @@ rational rational::operator*(const rational &r) const {
     rational brandNew;
     brandNew.n = this->n * r.n;
     brandNew.d = this->d * r.d;
-	brandNew.n /= gcd(brandNew.n, brandNew.d);
-	brandNew.d /= gcd(brandNew.n, brandNew.d);
+	int t = gcd(brandNew.n, brandNew.d);
+	brandNew.n /= t;
+	brandNew.d /= t;
     return brandNew;
 }
 
@@ -81,8 +83,9 @@ rational rational::operator/(const rational &r) const {
     rational brandNew;
     brandNew.n = this->n * r.d;
     brandNew.d = this->d * r.n;
-	brandNew.n /= gcd(brandNew.n, brandNew.d);
-	brandNew.d /= gcd(brandNew.n, brandNew.d);
+	int t = gcd(brandNew.n, brandNew.d);
+	brandNew.n /= t;
+	brandNew.d /= t;
     return brandNew;
 }
 
