@@ -52,7 +52,7 @@ rational::rational(int n, int d){
 
 rational rational::operator+(const rational &r) const {
 	rational brandNew;
-	brandNew.n = (this->n * this->r.d + r.n * this->d);
+	brandNew.n = (this->n * r.d + r.n * this->d);
 	brandNew.d = r.d * this->d;
 	brandNew.n /= gcd(brandNew.n, brandNew.d);
 	brandNew.d /= gcd(brandNew.n, brandNew.d);
@@ -60,7 +60,7 @@ rational rational::operator+(const rational &r) const {
 }
 
 rational rational::operator-(void) const{
-	return rational(-this.n, this.d);
+	return rational(-this->n, this->d);
 	
 }
 
