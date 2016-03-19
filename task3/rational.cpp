@@ -51,31 +51,29 @@ rational::rational(int n, int d){
 }
 
 rational rational::operator+(const rational &r) const {
-
-	int t = lcm(d, r.d);
 	rational brandNew;
-/*  int n1 = n;
-	int d1 = d;
-	int q1 = this->n * (t / this->d);
-	int q2 = r.n * (t / r.d);
-	int q3 = q1 + q2;*/
-	brandNew.n = (this->n * (t / this->d) + r.n * (t / r.d));
-	brandNew.d = t;
+	brandNew.n = (this->n * this->r.d + r.n * this->d);
+	brandNew.d = r.d * this->d;
+	brandNew.n /= gcd(brandNew.n, brandNew.d);
+	brandNew.d /= gcd(brandNew.n, brandNew.d);
 	return brandNew;
 }
 
+rational rational::operator-(void) const{
+	return rational(-this.n, this.d);
+	
+}
+
 rational rational::operator-(const rational &r) const {
-    int t = lcm(d, r.d);
-	rational brandNew;
-	brandNew.n = (this->n * (t / this->d) - r.n * (t / r.d));
-	brandNew.d = t;
-	return brandNew;
+    return *this + (-r);
 }
 
 rational rational::operator*(const rational &r) const {
     rational brandNew;
     brandNew.n = this->n * r.n;
     brandNew.d = this->d * r.d;
+	brandNew.n /= gcd(brandNew.n, brandNew.d);
+	brandNew.d /= gcd(brandNew.n, brandNew.d);
     return brandNew;
 }
 
@@ -83,6 +81,8 @@ rational rational::operator/(const rational &r) const {
     rational brandNew;
     brandNew.n = this->n * r.d;
     brandNew.d = this->d * r.n;
+	brandNew.n /= gcd(brandNew.n, brandNew.d);
+	brandNew.d /= gcd(brandNew.n, brandNew.d);
     return brandNew;
 }
 
