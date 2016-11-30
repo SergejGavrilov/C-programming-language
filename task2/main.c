@@ -102,8 +102,8 @@ void create(FILE *file, int id) {
     book.people[book.length].phone = phone;
     book.people[book.length].id = id;
     book.length += 1;
-    printf("successfully created\n");
-    fflush(stdout);
+   // printf("successfully created\n");
+   // fflush(stdout);
     writeToFile();
 
 }
@@ -194,8 +194,8 @@ void delete() {
     }
     if (found == 0)
         printf("Unable to find ID\n");
-    else
-        printf("successfully deleted\n");
+   // else
+   //     printf("successfully deleted\n");
 
     fflush(stdout);
     writeToFile();
