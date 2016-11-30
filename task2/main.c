@@ -148,7 +148,6 @@ void find(FILE *file) {
         if (issubstr(book.people[i].name, token) || (!strcmp(token, book.people[i].phone))) {
             printf("%d %s %s\n", book.people[i].id, book.people[i].name, book.people[i].phone);
             found = 1;
-            break;
         }
     }
     if (!found)
