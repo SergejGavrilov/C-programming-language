@@ -63,7 +63,7 @@ char *getphone(FILE *file) {
                 phone[current_len] = '\0';
             } else if ((current_len > 0 && c == '+') || (brackets != 2 && c == '(') || (brackets != 1 && c == ')') ||
                        (current_len == 0 && c != '+') || (c == '-' && phone[current_len - 2] == '-')) {
-                printf("Invalid phone\n");
+                printf("Invalid phone number\n");
                 fflush(stdout);
                 return NULL;
             }
@@ -102,25 +102,10 @@ void create(FILE *file, int id) {
     book.people[book.length].phone = phone;
     book.people[book.length].id = id;
     book.length += 1;
-   // printf("successfully created\n");
-   // fflush(stdout);
     writeToFile();
 
 }
 
-/*void create(FILE *file, int id) {
-    char *name = getname(file);
-    char *phone = getphone(file);
-    if (id > book.lasID) book.lasID = id;
-    book.people = (Person *) realloc(book.people, (book.length + 1) * sizeof(Person));
-    book.people[book.length].name = name;
-    book.people[book.length].phone = phone;
-    book.people[book.length].id = id;
-    book.length += 1;
-    writeToFile();
-
-}
-*/
 int issubstr(char *str1, char *str2) {
     return (int) (strstr(str1, str2) != NULL);
 }
@@ -139,7 +124,7 @@ void find(FILE *file) {
     }
     if (token == NULL){
         printf("Unable to find");
-        fflush(file);
+        fflush(stdout);
         return;
     }
     int i = 0;
@@ -177,12 +162,10 @@ void delete() {
         if (book.people[i].id == id) {
             found = 1;
             book.length--;
+
             free(book.people[i].phone);
             free(book.people[i].name);
-            /*book.people[i].id = book.people[book.length].id;
-            book.people[i].name = book.people[book.length].name;
-            book.people[i].phone = book.people[book.length].phone;
-            */
+
             book.people[i].id = book.people[book.length].id;
             book.people[i].name = book.people[book.length].name;
             book.people[i].phone = book.people[book.length].phone;
@@ -191,12 +174,10 @@ void delete() {
         }
 
     }
-    if (found == 0)
+    if (found == 0) {
         printf("Unable to find ID\n");
-   // else
-   //     printf("successfully deleted\n");
-
-    fflush(stdout);
+        fflush(stdout);
+    }
     writeToFile();
 }
 
